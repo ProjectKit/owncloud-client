@@ -41,6 +41,7 @@ public:
     int  sharePublicLinkExpireDateDays() const;
     bool shareResharing() const;
     bool chunkingNg() const;
+    quint64 requestMaxDurationDC() const;
 
     /// returns true if the capabilities report notifications
     bool notificationsAvailable() const;
