@@ -164,3 +164,4 @@ UpgradeLog*.htm
 # Microsoft Fakes
 FakesAssemblies/
 
+/.project
