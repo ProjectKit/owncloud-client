@@ -560,7 +560,7 @@
     <message>
         <location filename="../src/libsync/connectionvalidator.cpp" line="66"/>
         <source>No ownCloud account configured</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">No ProjectKit Drive account configured</translation>
     </message>
     <message>
         <location filename="../src/libsync/connectionvalidator.cpp" line="128"/>
@@ -1849,7 +1849,7 @@ It is not advisable to use it.</source>
     <message>
         <location filename="../src/gui/owncloudsetupwizard.cpp" line="418"/>
         <source>creating folder on ownCloud: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">creating folder on ProjectKit Drive: %1</translation>
     </message>
     <message>
         <location filename="../src/gui/owncloudsetupwizard.cpp" line="434"/>
@@ -2448,7 +2448,7 @@ It is not advisable to use it.</source>
     <message>
         <location filename="../src/gui/sharedialog.ui" line="47"/>
         <source>ownCloud Path:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ProjectKit Drive Path:</translation>
     </message>
     <message>
         <location filename="../src/gui/sharedialog.cpp" line="100"/>
@@ -3177,7 +3177,7 @@ It is not advisable to use it.</source>
     <message>
         <location filename="../src/libsync/theme.cpp" line="304"/>
         <source>&lt;p&gt;Copyright ownCloud GmbH&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;p&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/libsync/theme.cpp" line="305"/>
@@ -3416,7 +3416,7 @@ It is not advisable to use it.</source>
     <message>
         <location filename="../src/libsync/owncloudtheme.cpp" line="47"/>
         <source>&lt;p&gt;Version %2. For more information visit &lt;a href=&quot;%3&quot;&gt;https://%4&lt;/a&gt;&lt;/p&gt;&lt;p&gt;For known issues and help, please visit: &lt;a href=&quot;https://central.owncloud.org/c/help/desktop-file-sync&quot;&gt;https://central.owncloud.org&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;small&gt;By Klaas Freitag, Daniel Molkentin, Olivier Goffart, Markus Götz,  Jan-Christoph Borchardt, and others.&lt;/small&gt;&lt;/p&gt;&lt;p&gt;Copyright ownCloud GmbH&lt;/p&gt;&lt;p&gt;Licensed under the GNU General Public License (GPL) Version 2.0&lt;br/&gt;ownCloud and the ownCloud Logo are registered trademarks of ownCloud GmbH in the United States, other countries, or both.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;p&gt;Version %2. For more information visit &lt;a href=&quot;%3&quot;&gt;https://%4&lt;/a&gt;&lt;/p&gt;&lt;p&gt;For known issues and help, please visit: &lt;a href=&quot;http://forum.projectkit.net/forums/4/&quot;&gt;http://forum.projectkit.net&lt;/a&gt;&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
