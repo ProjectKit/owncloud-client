@@ -16,6 +16,9 @@
 #ifndef MIRALL_OWNCLOUD_HTTP_CREDS_PAGE_H
 #define MIRALL_OWNCLOUD_HTTP_CREDS_PAGE_H
 
+#include <QWebView>
+#include <QUrl>
+
 #include "wizard/abstractcredswizardpage.h"
 #include "wizard/owncloudwizard.h"
 
@@ -37,7 +40,6 @@ public:
   AbstractCredentials* getCredentials() const Q_DECL_OVERRIDE;
 
   void initializePage() Q_DECL_OVERRIDE;
-  void cleanupPage() Q_DECL_OVERRIDE;
   bool validatePage() Q_DECL_OVERRIDE;
   int nextId() const Q_DECL_OVERRIDE;
   void setConnected();
@@ -55,6 +57,13 @@ private:
   bool _connected;
   QProgressIndicator* _progressIndi;
   OwncloudWizard* _ocWizard;
+  QString _accessToken;
+  QWidget *_login_window;
+  QWebView *_login_view;
+
+private slots:
+    void on_OAuth_clicked();
+    void on_url_changed(QUrl);
 };
 
 } // namespace OCC

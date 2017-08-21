@@ -22,7 +22,9 @@
 #include "wizard/owncloudhttpcredspage.h"
 #include "wizard/owncloudwizardcommon.h"
 #include "wizard/owncloudwizard.h"
+#include <iostream>
 
+using namespace std;
 namespace OCC
 {
 
@@ -37,25 +39,6 @@ OwncloudHttpCredsPage::OwncloudHttpCredsPage(QWidget* parent)
     if(parent){
         _ocWizard = qobject_cast<OwncloudWizard *>(parent);
     }
-
-    registerField( QLatin1String("OCUser*"),   _ui.leUsername);
-    registerField( QLatin1String("OCPasswd*"), _ui.lePassword);
-
-    Theme *theme = Theme::instance();
-    switch(theme->userIDType()) {
-    case Theme::UserIDUserName:
-        // default, handled in ui file
-        break;
-    case Theme::UserIDEmail:
-        _ui.usernameLabel->setText(tr("&Email"));
-        break;
-    case Theme::UserIDCustom:
-        _ui.usernameLabel->setText(theme->customUserID());
-        break;
-    default:
-        break;
-    }
-    _ui.leUsername->setPlaceholderText(theme->userIDHint());
 
     setTitle(WizardCommon::titleTemplate().arg(tr("Connect to %1").arg(Theme::instance()->appNameGUI())));
     setSubTitle(WizardCommon::subTitleTemplate().arg(tr("Enter user credentials")));
@@ -86,47 +69,23 @@ void OwncloudHttpCredsPage::initializePage()
     WizardCommon::initErrorLabel(_ui.errorLabel);
 
     OwncloudWizard* ocWizard = qobject_cast< OwncloudWizard* >(wizard());
-    AbstractCredentials *cred = ocWizard->account()->credentials();
-    HttpCredentials *httpCreds = qobject_cast<HttpCredentials*>(cred);
-    if (httpCreds) {
-        const QString user = httpCreds->fetchUser();
-        if (!user.isEmpty()) {
-            _ui.leUsername->setText(user);
-        }
-    } else {
-        QUrl url = ocWizard->account()->url();
 
-        // If the final url does not have a username, check the
-        // user specified url too. Sometimes redirects can lose
-        // the user:pw information.
-        if (url.userName().isEmpty()) {
-            url = ocWizard->ocUrl();
-        }
-
-        const QString user = url.userName();
-        const QString password = url.password();
-
-        if(!user.isEmpty()) {
-            _ui.leUsername->setText(user);
-        }
-        if(!password.isEmpty()) {
-            _ui.lePassword->setText(password);
-        }
-    }
     _ui.tokenLabel->setText(HttpCredentialsGui::requestAppPasswordText(ocWizard->account().data()));
-    _ui.tokenLabel->setVisible(!_ui.tokenLabel->text().isEmpty());
-    _ui.leUsername->setFocus();
-}
+    _ui.tokenLabel->setVisible(false);
 
-void OwncloudHttpCredsPage::cleanupPage()
-{
-    _ui.leUsername->clear();
-    _ui.lePassword->clear();
+    _login_window = new QWidget();
+    _login_view = new QWebView(_login_window);
+    //set position and size
+    _login_window->setFixedSize(600, 600);
+    _login_view->setGeometry(0,0,600,600);
+    _login_view->load(QUrl("https://id.projectkit.net/auth/signin?ui_locales=en-US&client_id=cid-pk-mobile&response_type=id_token%20token&redirect_uri=pk%3A%2F%2Fauth%2Fcallback&scope=openid%20email%20profile%20rs-pk-main%20rs-pk-so%20rs-pk-issue%20rs-pk-web&nonce=sdsqe&contextData=%7B%22fromApp%22%3A%22mobileApp%22%7D"));
+    QObject::connect(_login_view, SIGNAL(urlChanged(QUrl)),
+                     this, SLOT(on_url_changed(QUrl)));
 }
 
 bool OwncloudHttpCredsPage::validatePage()
 {
-    if (_ui.leUsername->text().isEmpty() || _ui.lePassword->text().isEmpty()) {
+    if (_accessToken.isEmpty()) {
         return false;
     }
 
@@ -192,7 +151,18 @@ void OwncloudHttpCredsPage::setErrorString(const QString& err)
 
 AbstractCredentials* OwncloudHttpCredsPage::getCredentials() const
 {
-    return new HttpCredentialsGui(_ui.leUsername->text(), _ui.lePassword->text(), _ocWizard->ownCloudCertificatePath, _ocWizard->ownCloudCertificatePasswd);
+    return new HttpCredentialsGui(QString(), _accessToken, _ocWizard->ownCloudCertificatePath, _ocWizard->ownCloudCertificatePasswd);
+}
+
+void OwncloudHttpCredsPage::on_OAuth_clicked()
+{   
+    _login_window->show();
+}
+
+void OwncloudHttpCredsPage::on_url_changed(QUrl url)
+{
+    cout << "url has changed" << endl;
+    cout << "new url: " << _login_view->url().url().toStdString() << endl;
 }
 
 
