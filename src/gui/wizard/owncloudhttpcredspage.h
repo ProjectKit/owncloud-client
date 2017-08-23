@@ -53,6 +53,7 @@ private:
   void startSpinner();
   void stopSpinner();
   void setupCustomization();
+  QString _parseAccessToken(QString);
 
   Ui_OwncloudHttpCredsPage _ui;
   bool _connected;

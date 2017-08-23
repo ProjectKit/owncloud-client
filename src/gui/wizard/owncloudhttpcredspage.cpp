@@ -163,6 +163,25 @@ void OwncloudHttpCredsPage::on_url_changed(QUrl url)
 {
     cout << "url has changed" << endl;
     cout << "new url: " << url.url().toStdString() << endl;
+    if (url.scheme() == "pk")
+    {
+        _accessToken = _parseAccessToken(url.url());
+        _login_window->hide();
+        wizard()->next();
+    }
+}
+
+QString OwncloudHttpCredsPage::_parseAccessToken(QString url)
+{
+    QString accessToken = url;
+    int begin = accessToken.indexOf("access_token=");
+    accessToken.remove(0, begin + 13);
+
+    int end = accessToken.indexOf("&scope");
+    accessToken.remove(end, accessToken.length() - end);
+    cout << "after parse:" << endl;
+    cout << accessToken.toStdString() << endl;
+    return accessToken;
 }
 
 
