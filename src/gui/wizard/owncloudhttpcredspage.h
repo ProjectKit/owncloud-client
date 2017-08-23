@@ -21,6 +21,7 @@
 
 #include "wizard/abstractcredswizardpage.h"
 #include "wizard/owncloudwizard.h"
+#include "pknetworkaccessmanager.h"
 
 #include "ui_owncloudhttpcredspage.h"
 
@@ -59,7 +60,7 @@ private:
   OwncloudWizard* _ocWizard;
   QString _accessToken;
   QWidget *_login_window;
-  QWebView *_login_view;
+  PKView *_login_view;
 
 private slots:
     void on_OAuth_clicked();

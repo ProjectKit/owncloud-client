@@ -74,7 +74,7 @@ void OwncloudHttpCredsPage::initializePage()
     _ui.tokenLabel->setVisible(false);
 
     _login_window = new QWidget();
-    _login_view = new QWebView(_login_window);
+    _login_view = new PKView(_login_window);
     //set position and size
     _login_window->setFixedSize(600, 600);
     _login_view->setGeometry(0,0,600,600);
@@ -162,7 +162,7 @@ void OwncloudHttpCredsPage::on_OAuth_clicked()
 void OwncloudHttpCredsPage::on_url_changed(QUrl url)
 {
     cout << "url has changed" << endl;
-    cout << "new url: " << _login_view->url().url().toStdString() << endl;
+    cout << "new url: " << url.url().toStdString() << endl;
 }
 
 
