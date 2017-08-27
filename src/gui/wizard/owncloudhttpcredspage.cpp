@@ -151,7 +151,7 @@ void OwncloudHttpCredsPage::setErrorString(const QString& err)
 
 AbstractCredentials* OwncloudHttpCredsPage::getCredentials() const
 {
-    return new HttpCredentialsGui(QString(), _accessToken, _ocWizard->ownCloudCertificatePath, _ocWizard->ownCloudCertificatePasswd);
+    return new HttpCredentialsGui(QString("user"), _accessToken, _ocWizard->ownCloudCertificatePath, _ocWizard->ownCloudCertificatePasswd);
 }
 
 void OwncloudHttpCredsPage::on_OAuth_clicked()

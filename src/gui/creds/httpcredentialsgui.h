@@ -15,6 +15,7 @@
 
 #pragma once
 #include "creds/httpcredentials.h"
+#include "wizard/pknetworkaccessmanager.h"
 
 namespace OCC
 {
@@ -25,11 +26,21 @@ namespace OCC
  */
 class HttpCredentialsGui : public HttpCredentials {
     Q_OBJECT
+
+private:
+  	QString _parseAccessToken(QString);
+	QWidget *_login_window;
+	PKView *_login_view;
+
+private slots:
+    void on_url_changed(QUrl);
+
 public:
     explicit HttpCredentialsGui() : HttpCredentials() {}
     HttpCredentialsGui(const QString& user, const QString& password, const QString& certificatePath, const QString& certificatePasswd) : HttpCredentials(user, password, certificatePath, certificatePasswd) {}
     void askFromUser() Q_DECL_OVERRIDE;
     Q_INVOKABLE void askFromUserAsync();
+    Q_INVOKABLE void askFromUserAsync_OAuth();
 
     static QString requestAppPasswordText(const Account *account);
 };

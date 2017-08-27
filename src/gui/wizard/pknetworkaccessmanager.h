@@ -2,6 +2,7 @@
 #define PK_NETWORK_ACCESS_MANAGER_H
 
 #include <QNetworkAccessManager>
+#include <QWebView>
 
 class PKNetworkAccessManager : public QNetworkAccessManager
 {
