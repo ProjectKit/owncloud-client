@@ -28,7 +28,7 @@ class HttpCredentialsGui : public HttpCredentials {
     Q_OBJECT
 
 private:
-  	QString _parseAccessToken(QString);
+  	bool _parseAccessToken(QString);
 	QWidget *_login_window;
 	PKView *_login_view;
 

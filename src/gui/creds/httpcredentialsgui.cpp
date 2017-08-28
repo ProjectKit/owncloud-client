@@ -18,6 +18,7 @@
 #include "creds/httpcredentialsgui.h"
 #include "theme.h"
 #include "account.h"
+#include "jwt.h"
 #include <iostream>
 
 using namespace std;
@@ -46,7 +47,7 @@ void HttpCredentialsGui::askFromUserAsync_OAuth()
     _login_window->show();
 }
 
-QString HttpCredentialsGui::_parseAccessToken(QString url)
+bool HttpCredentialsGui::_parseAccessToken(QString url)
 {
     QString accessToken = url;
     int begin = accessToken.indexOf("access_token=");
@@ -56,7 +57,23 @@ QString HttpCredentialsGui::_parseAccessToken(QString url)
     accessToken.remove(end, accessToken.length() - end);
     cout << "after parse:" << endl;
     cout << accessToken.toStdString() << endl;
-    return accessToken;
+
+    jwt_t * jwtobject;
+    jwt_new(&jwtobject);
+    jwt_decode(&jwtobject, accessToken.toStdString().c_str(), NULL, 0);
+    cout << "after decode:" << endl;
+    QString info(jwt_dump_str(jwtobject, 1));
+
+    begin = info.indexOf("\"email\": \"");
+    info.remove(0, begin + 10);
+    end = info.indexOf("\"");
+    info.remove(end, info.length() - end);
+
+    cout << info.toStdString() << endl;
+
+    if (_user == info) _password = accessToken;
+
+    return _user == info;
 }
 
 void HttpCredentialsGui::on_url_changed(QUrl url)
@@ -65,11 +82,16 @@ void HttpCredentialsGui::on_url_changed(QUrl url)
     cout << "new url: " << url.url().toStdString() << endl;
     if (url.scheme() == "pk")
     {
-        _password = _parseAccessToken(url.url());
-        _login_window->hide();
-        _ready = true;
-        persist();
-        emit asked();
+        if (_parseAccessToken(url.url()))
+        {
+            _login_window->hide();
+            _ready = true;
+            persist();
+            emit asked();
+        }
+        else
+        {
+        }
     }
 }
 
