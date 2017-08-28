@@ -125,12 +125,12 @@ QString ownCloudTheme::appNameGUI() const
 
 QString ownCloudTheme::oauthLoginURL() const
 {
-    return QLatin1String("https://id.projectkit.net/auth/signin?ui_locales=en-US&client_id=cid-pk-mobile&response_type=id_token token&redirect_uri=pk%3A%2F%2Fauth%2Fcallback&scope=openid email profile rs-pk-main rs-pk-so rs-pk-issue rs-pk-web&nonce=sdsqe&contextData=%7B%22fromApp%22%3A%22mobileApp%22%7D");
+    return QLatin1String("http://id.vietnamcic.org/oauth/signin/v2?client_id=cid-drive-mobile&response_type=id_token%20token&redirect_uri=pk%3A%2F%2Fauth%2Fcallback&scope=openid%20email%20name%20profile&nonce=sdsqe&contextData=%7B%22fromApp%22%3A%22mobileApp%22%7D");
 }
 
 QString ownCloudTheme::defaultServerURL() const
 {
-    return QLatin1String("https://drive.projectkit.net");
+    return QLatin1String("http://drive.vietnamcic.org");
 }
 
 
