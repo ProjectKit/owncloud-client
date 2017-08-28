@@ -179,6 +179,8 @@ set(3rdparty_INC
     ${CMAKE_SOURCE_DIR}/src/3rdparty/qtsingleapplication
     ${CMAKE_SOURCE_DIR}/src/3rdparty/libjwt/libjwt
     ${CMAKE_SOURCE_DIR}/src/3rdparty/libjwt/include
+    ${CMAKE_SOURCE_DIR}/src/3rdparty/jansson/include
+    ${CMAKE_SOURCE_DIR}/src/3rdparty/jansson/private-include
     )
 
 include_directories(${3rdparty_INC})
@@ -306,7 +308,7 @@ target_link_libraries( ${APPLICATION_EXECUTABLE} ${QT_LIBRARIES} )
 target_link_libraries( ${APPLICATION_EXECUTABLE} ${synclib_NAME} )
 target_link_libraries( ${APPLICATION_EXECUTABLE} updater )
 target_link_libraries( ${APPLICATION_EXECUTABLE} ${OS_SPECIFIC_LINK_LIBRARIES} )
-target_link_libraries( ${APPLICATION_EXECUTABLE} /home/dung/work/jansson-build/lib/libjansson.a )
+target_link_libraries( ${APPLICATION_EXECUTABLE} ${CMAKE_SOURCE_DIR}/src/3rdparty/jansson/lib/libjansson.a )
 
 if(WITH_CRASHREPORTER)
     target_link_libraries( ${APPLICATION_EXECUTABLE} crashreporter-handler)

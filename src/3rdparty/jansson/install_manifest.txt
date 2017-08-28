@@ -1,0 +1,8 @@
+/usr/local/lib/libjansson.a
+/usr/local/include/jansson_config.h
+/usr/local/include/jansson.h
+/usr/local/lib/pkgconfig/jansson.pc
+/usr/local/lib/cmake/jansson/JanssonConfig.cmake
+/usr/local/lib/cmake/jansson/JanssonConfigVersion.cmake
+/usr/local/lib/cmake/jansson/JanssonTargets.cmake
+/usr/local/lib/cmake/jansson/JanssonTargets-noconfig.cmake
