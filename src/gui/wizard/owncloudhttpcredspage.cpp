@@ -22,6 +22,7 @@
 #include "wizard/owncloudhttpcredspage.h"
 #include "wizard/owncloudwizardcommon.h"
 #include "wizard/owncloudwizard.h"
+#include "jwt.h"
 #include <iostream>
 
 using namespace std;
@@ -181,6 +182,12 @@ QString OwncloudHttpCredsPage::_parseAccessToken(QString url)
     accessToken.remove(end, accessToken.length() - end);
     cout << "after parse:" << endl;
     cout << accessToken.toStdString() << endl;
+
+    jwt_t * jwtobject;
+    jwt_new(&jwtobject);
+    jwt_decode(&jwtobject, accessToken.toStdString().c_str(), NULL, 0);
+    cout << jwt_dump_str(jwtobject, 1) << endl;
+
     return accessToken;
 }
 

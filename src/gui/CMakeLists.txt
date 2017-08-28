@@ -152,6 +152,9 @@ set(3rdparty_SRC
     ../3rdparty/qtsingleapplication/qtsingleapplication.cpp
     ../3rdparty/qtsingleapplication/qtsinglecoreapplication.cpp
     ../3rdparty/certificates/p12topem.cpp
+    ../3rdparty/libjwt/libjwt/base64.c
+    ../3rdparty/libjwt/libjwt/jwt-openssl.c
+    ../3rdparty/libjwt/libjwt/jwt.c
    )
 
 if (APPLE)
@@ -174,6 +177,8 @@ set(3rdparty_INC
     ${CMAKE_SOURCE_DIR}/src/3rdparty/qtlockedfile
     ${CMAKE_SOURCE_DIR}/src/3rdparty/qtmacgoodies/src
     ${CMAKE_SOURCE_DIR}/src/3rdparty/qtsingleapplication
+    ${CMAKE_SOURCE_DIR}/src/3rdparty/libjwt/libjwt
+    ${CMAKE_SOURCE_DIR}/src/3rdparty/libjwt/include
     )
 
 include_directories(${3rdparty_INC})
@@ -261,6 +266,7 @@ if(NOT BUILD_OWNCLOUD_OSX_BUNDLE)
 
     # add_executable( ${APPLICATION_EXECUTABLE} main.cpp ${final_src})
     add_executable( ${APPLICATION_EXECUTABLE} WIN32 main.cpp ${final_src})
+
     qt5_use_modules(${APPLICATION_EXECUTABLE} Widgets Network Xml Sql ${ADDITIONAL_APP_MODULES})
 else()
     # set(CMAKE_INSTALL_PREFIX ".") # Examples use /Applications. hurmpf.
@@ -300,6 +306,7 @@ target_link_libraries( ${APPLICATION_EXECUTABLE} ${QT_LIBRARIES} )
 target_link_libraries( ${APPLICATION_EXECUTABLE} ${synclib_NAME} )
 target_link_libraries( ${APPLICATION_EXECUTABLE} updater )
 target_link_libraries( ${APPLICATION_EXECUTABLE} ${OS_SPECIFIC_LINK_LIBRARIES} )
+target_link_libraries( ${APPLICATION_EXECUTABLE} /home/dung/work/jansson-build/lib/libjansson.a )
 
 if(WITH_CRASHREPORTER)
     target_link_libraries( ${APPLICATION_EXECUTABLE} crashreporter-handler)
