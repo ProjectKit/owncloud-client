@@ -38,6 +38,8 @@ public:
 #endif
     QString appName() const Q_DECL_OVERRIDE;
     QString appNameGUI() const Q_DECL_OVERRIDE;
+    QString oauthLoginURL() const;
+    QString defaultServerURL() const;
 
     QString helpUrl() const Q_DECL_OVERRIDE;
 #ifndef TOKEN_AUTH_ONLY

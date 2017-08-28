@@ -224,6 +224,16 @@ QString Theme::overrideServerUrl() const
     return QString::null;
 }
 
+QString Theme::defaultServerURL() const
+{
+    return QString::null;
+}
+
+QString Theme::oauthLoginURL() const
+{
+    return QString::null;
+}
+
 QString Theme::forceConfigAuthType() const
 {
     return QString();

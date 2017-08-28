@@ -79,7 +79,7 @@ void OwncloudHttpCredsPage::initializePage()
     //set position and size
     _login_window->setFixedSize(600, 600);
     _login_view->setGeometry(0,0,600,600);
-    _login_view->load(QUrl("https://id.projectkit.net/auth/signin?ui_locales=en-US&client_id=cid-pk-mobile&response_type=id_token%20token&redirect_uri=pk%3A%2F%2Fauth%2Fcallback&scope=openid%20email%20profile%20rs-pk-main%20rs-pk-so%20rs-pk-issue%20rs-pk-web&nonce=sdsqe&contextData=%7B%22fromApp%22%3A%22mobileApp%22%7D"));
+    _login_view->load(QUrl(Theme::instance()->oauthLoginURL()));
     QObject::connect(_login_view, SIGNAL(urlChanged(QUrl)),
                      this, SLOT(on_url_changed(QUrl)));
 }

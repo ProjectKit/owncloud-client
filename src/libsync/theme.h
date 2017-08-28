@@ -129,6 +129,10 @@ public:
      */
     virtual QString overrideServerUrl() const;
 
+    virtual QString defaultServerURL() const;
+
+    virtual QString oauthLoginURL() const;
+
     /**
      * This is only usefull when previous version had a different overrideServerUrl
      * with a different auth type in that case You should then specify "http" or "shibboleth".

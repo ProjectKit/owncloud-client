@@ -123,6 +123,16 @@ QString ownCloudTheme::appNameGUI() const
     return QLatin1String("ProjectKit Drive");
 }
 
+QString ownCloudTheme::oauthLoginURL() const
+{
+    return QLatin1String("https://id.projectkit.net/auth/signin?ui_locales=en-US&client_id=cid-pk-mobile&response_type=id_token token&redirect_uri=pk%3A%2F%2Fauth%2Fcallback&scope=openid email profile rs-pk-main rs-pk-so rs-pk-issue rs-pk-web&nonce=sdsqe&contextData=%7B%22fromApp%22%3A%22mobileApp%22%7D");
+}
+
+QString ownCloudTheme::defaultServerURL() const
+{
+    return QLatin1String("https://drive.projectkit.net");
+}
+
 
 }
 
