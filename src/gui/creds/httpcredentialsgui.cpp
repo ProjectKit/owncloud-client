@@ -44,7 +44,6 @@ void HttpCredentialsGui::askFromUserAsync_OAuth()
     QObject::connect(_login_view, SIGNAL(urlChanged(QUrl)),
                      this, SLOT(on_url_changed(QUrl)));
     _login_window->show();
-    emit asked();
 }
 
 QString HttpCredentialsGui::_parseAccessToken(QString url)
@@ -70,6 +69,7 @@ void HttpCredentialsGui::on_url_changed(QUrl url)
         _login_window->hide();
         _ready = true;
         persist();
+        emit asked();
     }
 }
 
