@@ -152,7 +152,7 @@ void OwncloudHttpCredsPage::setErrorString(const QString& err)
 
 AbstractCredentials* OwncloudHttpCredsPage::getCredentials() const
 {
-    return new HttpCredentialsGui(QString("user"), _accessToken, _ocWizard->ownCloudCertificatePath, _ocWizard->ownCloudCertificatePasswd);
+    return new HttpCredentialsGui(_user, _accessToken, _ocWizard->ownCloudCertificatePath, _ocWizard->ownCloudCertificatePasswd);
 }
 
 void OwncloudHttpCredsPage::on_OAuth_clicked()
@@ -166,13 +166,13 @@ void OwncloudHttpCredsPage::on_url_changed(QUrl url)
     cout << "new url: " << url.url().toStdString() << endl;
     if (url.scheme() == "pk")
     {
-        _accessToken = _parseAccessToken(url.url());
+        _parseAccessToken(url.url());
         _login_window->hide();
         wizard()->next();
     }
 }
 
-QString OwncloudHttpCredsPage::_parseAccessToken(QString url)
+void OwncloudHttpCredsPage::_parseAccessToken(QString url)
 {
     QString accessToken = url;
     int begin = accessToken.indexOf("access_token=");
@@ -187,9 +187,17 @@ QString OwncloudHttpCredsPage::_parseAccessToken(QString url)
     jwt_new(&jwtobject);
     jwt_decode(&jwtobject, accessToken.toStdString().c_str(), NULL, 0);
     cout << "after decode:" << endl;
-    cout << jwt_dump_str(jwtobject, 1) << endl;
+    QString info(jwt_dump_str(jwtobject, 1));
 
-    return accessToken;
+    begin = info.indexOf("\"email\": \"");
+    info.remove(0, begin + 10);
+    end = info.indexOf("\"");
+    info.remove(end, info.length() - end);
+
+    cout << info.toStdString() << endl;
+
+    _accessToken = accessToken;
+    _user = info;
 }
 
 

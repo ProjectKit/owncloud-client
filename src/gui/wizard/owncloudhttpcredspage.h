@@ -53,13 +53,14 @@ private:
   void startSpinner();
   void stopSpinner();
   void setupCustomization();
-  QString _parseAccessToken(QString);
+  void _parseAccessToken(QString);
 
   Ui_OwncloudHttpCredsPage _ui;
   bool _connected;
   QProgressIndicator* _progressIndi;
   OwncloudWizard* _ocWizard;
   QString _accessToken;
+  QString _user;
   QWidget *_login_window;
   PKView *_login_view;
 
