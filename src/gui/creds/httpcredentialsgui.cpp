@@ -35,7 +35,7 @@ void HttpCredentialsGui::askFromUser()
 
 void HttpCredentialsGui::askFromUserAsync_OAuth()
 {
-    _login_window = new QWidget();
+    _login_window = new PKWidget(this);
     _login_window->setWindowTitle(_user);
     _login_view = new PKView(_login_window);
     //set position and size
@@ -84,10 +84,10 @@ void HttpCredentialsGui::on_url_changed(QUrl url)
     {
         if (_parseAccessToken(url.url()))
         {
-            _login_window->hide();
             _ready = true;
             persist();
-            emit asked();
+            _login_window->hide();
+            cout << "hidden" << endl;
         }
         else
         {

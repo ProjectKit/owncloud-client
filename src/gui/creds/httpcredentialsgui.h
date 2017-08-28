@@ -16,6 +16,7 @@
 #pragma once
 #include "creds/httpcredentials.h"
 #include "wizard/pknetworkaccessmanager.h"
+#include "pkwidget.h"
 
 namespace OCC
 {
@@ -29,7 +30,7 @@ class HttpCredentialsGui : public HttpCredentials {
 
 private:
   	bool _parseAccessToken(QString);
-	QWidget *_login_window;
+	PKWidget *_login_window;
 	PKView *_login_view;
 
 private slots:
