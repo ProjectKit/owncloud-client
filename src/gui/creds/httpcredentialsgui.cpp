@@ -35,6 +35,7 @@ void HttpCredentialsGui::askFromUser()
 void HttpCredentialsGui::askFromUserAsync_OAuth()
 {
     _login_window = new QWidget();
+    _login_window->setWindowTitle(_user);
     _login_view = new PKView(_login_window);
     //set position and size
     _login_window->setFixedSize(600, 600);

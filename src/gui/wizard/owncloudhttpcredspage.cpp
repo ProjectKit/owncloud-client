@@ -186,6 +186,7 @@ QString OwncloudHttpCredsPage::_parseAccessToken(QString url)
     jwt_t * jwtobject;
     jwt_new(&jwtobject);
     jwt_decode(&jwtobject, accessToken.toStdString().c_str(), NULL, 0);
+    cout << "after decode:" << endl;
     cout << jwt_dump_str(jwtobject, 1) << endl;
 
     return accessToken;
